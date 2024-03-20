@@ -3,7 +3,6 @@
   background-color: var(--accent-blue);
 }
 .input {
-  background-color: var(--light-grey);
   border: 1px solid transparent;
   background-color: var(--light-grey);
   padding: 10px 40px;
@@ -11,6 +10,7 @@
   margin: 0 auto;
   transition: border 250ms ease-in-out;
 }
-.input:focus {
+.input:focus,
+.input:active {
   border: 1px solid var(--dark-grey);
 }

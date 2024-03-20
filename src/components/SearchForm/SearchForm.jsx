@@ -1,23 +1,23 @@
 import React from 'react';
-import SearchAPI from '../services/searchAPI';
+import Button from '../reusable/Button/Button';
 import css from './searchForm.module.css';
 import PropTypes from 'prop-types';
 
-const SearchForm = ({ onSearch }) => {
-  const API = new SearchAPI();
-
+const SearchForm = ({ onSearch, showModal }) => {
   const onSubmit = e => {
     e.preventDefault();
     const inputValue = e.target.elements.search.value;
-    API.getImages(inputValue)
-      .then(res => console.log(res.results))
-      .catch();
+    if (inputValue.trim() === '') {
+      throw new Error('Type in your request');
+    }
+    onSearch(inputValue);
   };
   return (
     <nav className={css.wrapper}>
       <form onSubmit={onSubmit}>
         <input className={css.input} type="text" name="search" />
-        <button type="submit">Send</button>
+        <Button type="submit">Send</Button>
+        <Button onClick={showModal}>Show modal</Button>
       </form>
     </nav>
   );
