@@ -1,0 +1,17 @@
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.item {
+  flex-basis: calc((100% - 3 * 16px) / 4);
+  height: 240px;
+  transform: scale(1);
+  border-radius: 0;
+  transition: transform 250ms ease-in-out, border-radius 250ms ease-in-out;
+}
+
+.item:hover {
+  border-radius: 16px;
+  transform: scale(1.05);
+}

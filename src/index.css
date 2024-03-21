@@ -10,11 +10,16 @@
   --red: #d00000;
   --green: rgb(66, 180, 4);
 
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  /* font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
-  font-weight: 400;
+  font-weight: 400; */
 
-  color-scheme: light dark;
+  /* color-scheme: light dark; */
+  font-family: 'Montserrat', sans-serif;
+  font-optical-sizing: auto;
+  font-weight: normal;
+  font-style: normal;
+  margin: 0;
   color: var(--dark-grey);
   background-color: var(--light-grey);
 
@@ -61,14 +66,16 @@ a:hover {
   color: var(--accent-blue);
 }
 
-body {
+/* body {
   font-family: 'Montserrat', sans-serif;
   font-optical-sizing: auto;
   font-weight: normal;
   font-style: normal;
   padding: 20px;
   margin: 0;
-}
+  color: var(--dark-grey);
+  background-color: var(--light-grey);
+} */
 img {
   display: block;
   width: 100%;
@@ -78,25 +85,4 @@ img {
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
-}
-
-button {
-  display: block;
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 8px;
-
-  font-size: 16px;
-  font-weight: 500;
-  font-family: inherit;
-  cursor: pointer;
-
-  color: var(--white);
-  background-color: var(--dark-grey);
-  transition: background-color 250ms ease-in-out, color 250ms ease-in-out;
-}
-button:hover,
-button:focus {
-  background-color: var(--accent-blue);
-  color: var(--light-grey);
 }

@@ -1,9 +1,13 @@
 import { useState, useEffect } from 'react';
-import Modal from './components/reusable/Modal/Modal';
+import Loader from './components/Loader/Loader';
+import LoadMore from './components/LoadMore/LoadMore';
+import ImageModal from './components/reusable/ImageModal/ImageModal';
 import SearchAPI from './components/services/searchAPI';
 import SearchFrom from './components/SearchForm/SearchForm';
+import ImageGallery from './components/ImageGallery/ImageGallery';
 import './App.css';
 import clsx from 'clsx';
+import Button from './components/reusable/Button/Button';
 
 function App() {
   const [showModal, setShowModal] = useState(false);
@@ -25,6 +29,7 @@ function App() {
    */
 
   useEffect(() => {
+    setResults([]);
     async function fetch() {
       try {
         setIsLoading(true);
@@ -43,11 +48,20 @@ function App() {
 
   return (
     <>
-      <SearchFrom showModal={toggleModal} onSearch={onSearchSubmit} />
-      {isLoading && <p>Content is loading at this moment</p>}
-      {showModal && (
-        <Modal closeModal={toggleModal}>{showModal && <p>Hey</p>}</Modal>
+      <SearchFrom
+        isSubmitting={isLoading}
+        showModal={toggleModal}
+        onSearch={onSearchSubmit}
+      />
+
+      {results.length > 0 && (
+        <div className="wrapper">
+          <ImageGallery onModalOpen={toggleModal} data={results} />
+          <LoadMore isSubmitting={isLoading} />
+        </div>
       )}
+      {isLoading && <Loader />}
+      {showModal && <ImageModal closeModal={toggleModal}></ImageModal>}
     </>
   );
 }

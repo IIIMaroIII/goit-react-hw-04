@@ -1,6 +1,4 @@
 .wrapper {
   max-width: 1440px;
-}
-.modalIsOpen {
-  pointer-events: none;
+  padding: 24px;
 }

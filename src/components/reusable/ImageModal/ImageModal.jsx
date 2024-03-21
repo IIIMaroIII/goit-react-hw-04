@@ -1,13 +1,14 @@
 import React from 'react';
 import { createPortal } from 'react-dom';
+import { IoMdClose } from 'react-icons/io';
 import PropTypes from 'prop-types';
 import Button from '../Button/Button';
-import css from './modal.module.css';
+import css from './imageModal.module.css';
 import { useEffect } from 'react';
 
 const modalRoot = document.querySelector('#modal-root');
 
-const Modal = ({ children, closeModal }) => {
+const ImageModal = ({ children, closeModal }) => {
   const closeModalByEsc = e => {
     if (e.code === 'Escape') {
       closeModal();
@@ -30,13 +31,15 @@ const Modal = ({ children, closeModal }) => {
     <div onClick={closeModalByClick} className={css.backdrop}>
       <div className={css.content}>
         {children}
-        <Button onClick={closeModal}>Close Modal</Button>
+        <Button className={css.btn} onClick={closeModal}>
+          <IoMdClose className={css.icon} />
+        </Button>
       </div>
     </div>,
     modalRoot,
   );
 };
 
-Modal.propTypes = {};
+ImageModal.propTypes = {};
 
-export default Modal;
+export default ImageModal;

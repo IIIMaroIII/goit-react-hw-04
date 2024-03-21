@@ -1,0 +1,16 @@
+.wrapper {
+  width: 160px;
+  margin: 24px auto;
+  transform: scale(1);
+  transition: transform 250ms ease-in-out;
+}
+.btn {
+  text-align: center;
+  width: 100%;
+
+  letter-spacing: normal;
+  display: inline-block;
+}
+.wrapper:hover {
+  transform: scale(1.05);
+}

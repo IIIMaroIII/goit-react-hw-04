@@ -1,12 +1,70 @@
 .wrapper {
-  padding: 20px 0;
-  background-color: var(--accent-blue);
+  padding: 8px 0;
+  background: linear-gradient(
+    45deg,
+    var(--accent-blue),
+    rgb(255, 231, 72),
+    #97bc52,
+    #35c394,
+    rgb(231, 112, 199),
+    #bd452a
+  );
+  background-size: 500% 500%;
+  animation: gradientAnimation 10s infinite alternate;
 }
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 50% 100%;
+  }
+}
+
+/* @keyframes gradientAnimation {
+      0% {
+        background-position: 0% 50%;
+      }
+      100% {
+        background-position: 100% 50%;
+      }
+    } */
+.form {
+  width: 400px;
+  margin: 0 auto;
+  position: relative;
+}
+.btn {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: transparent;
+  border-color: transparent;
+}
+.btn:hover,
+.btn:focus {
+  background-color: transparent;
+}
+
+.icon {
+  background-color: transparent;
+  color: var(--dark-grey);
+  transform: scale(1);
+  transition: transform 250ms ease-in-out, color 250ms ease-in-out;
+  width: 20px;
+  height: 20px;
+}
+.btn:hover .icon {
+  color: var(--accent-blue);
+  transform: scale(1.2);
+}
+
 .input {
+  display: inline-block;
   border: 1px solid transparent;
   background-color: var(--light-grey);
   padding: 10px 40px;
-  width: 400px;
+  width: 100%;
   margin: 0 auto;
   transition: border 250ms ease-in-out;
 }

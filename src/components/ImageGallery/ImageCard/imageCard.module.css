@@ -1,0 +1,36 @@
+/* .cardInner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 1000ms;
+  transform-style: preserve-3d;
+} */
+
+/* .item:hover .cardInner {
+  transform: rotateY(180deg);
+} */
+
+/* .front,
+.back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+} */
+/* 
+/*  .back { 
+  transform: rotateY(180deg);
+   background-color: var(--middle-grey); 
+} */
+.wrapper {
+  border-radius: inherit;
+  width: 100%;
+  height: 100%;
+}
+.image {
+  border-radius: inherit;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

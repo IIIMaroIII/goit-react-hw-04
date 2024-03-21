@@ -1,9 +1,10 @@
 import React from 'react';
 import Button from '../reusable/Button/Button';
+import { IoSearchOutline } from 'react-icons/io5';
 import css from './searchForm.module.css';
 import PropTypes from 'prop-types';
 
-const SearchForm = ({ onSearch, showModal }) => {
+const SearchForm = ({ isSubmitting, onSearch, showModal }) => {
   const onSubmit = e => {
     e.preventDefault();
     const inputValue = e.target.elements.search.value;
@@ -14,10 +15,11 @@ const SearchForm = ({ onSearch, showModal }) => {
   };
   return (
     <nav className={css.wrapper}>
-      <form onSubmit={onSubmit}>
+      <form className={css.form} onSubmit={onSubmit}>
         <input className={css.input} type="text" name="search" />
-        <Button type="submit">Send</Button>
-        <Button onClick={showModal}>Show modal</Button>
+        <Button className={css.btn} type="submit" disabled={isSubmitting}>
+          <IoSearchOutline className={css.icon} />
+        </Button>
       </form>
     </nav>
   );
