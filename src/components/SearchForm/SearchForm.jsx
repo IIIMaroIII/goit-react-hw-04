@@ -10,15 +10,11 @@ const SearchForm = ({ onError, isSubmitting, onSearch, showModal }) => {
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    console.log('set loaded to true');
     setLoaded(true);
   }, []);
   const onSubmit = e => {
     e.preventDefault();
     const inputValue = e.target.elements.search.value;
-    if (inputValue.trim() === '') {
-      return onError(true);
-    }
     onSearch(inputValue);
   };
   return (

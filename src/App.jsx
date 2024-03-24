@@ -22,46 +22,45 @@ function App() {
   const [query, setQuery] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  // async function fetchData() {
-  //   setIsLoading(true);
-  //   setLoadMore(false);
-  //   const { results } = await API.getImages(query, page);
-  //   setResults(prev => [...prev, ...results]);
-  //   setIsLoading(false);
-  //   setLoadMore(true);
-  // }
-
-  const handleSearchSubmit = async value => {
-    setError(false);
-    setQuery(value);
-    setResults([]);
-    setIsLoading(true);
-    try {
-      const { total, total_pages, results } = await API.getImages(value, 1);
-      setQuery(value);
-      setResults(results);
-      setLoadMore(true);
-      API.total = total;
-      API.total_pages = total_pages;
-
-      setLoadMore(true);
-    } catch (error) {
-      setError(error.message);
-    } finally {
-      setIsLoading(false);
-      setPage(1);
-    }
-  };
-  const handleLoadMore = async () => {
-    setPage(prev => prev + 1);
-  };
-
   function toggleLoadMoreAndLoader() {
     if (isLoadMoreActive || !isLoading) {
-      return <LoadMore onLoadMore={handleLoadMore} />;
+      return (
+        <LoadMore
+          onLoadMore={() => {
+            setPage(prev => prev + 1);
+          }}
+        />
+      );
     }
     return <Loader />;
   }
+
+  useEffect(() => {
+    if (query === '') {
+      return;
+    }
+    async function fetch() {
+      setError(false);
+      setResults([]);
+      setIsLoading(true);
+      try {
+        const { total, total_pages, results } = await API.getImages(query, 1);
+
+        setResults(results);
+        setLoadMore(true);
+        API.total = total;
+        API.total_pages = total_pages;
+
+        setLoadMore(true);
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setIsLoading(false);
+        setPage(1);
+      }
+    }
+    fetch();
+  }, [query]);
 
   useEffect(() => {
     if (page > 1) {
@@ -86,14 +85,13 @@ function App() {
     // };
   }, [page]);
 
-  console.log(selectedImage);
   return (
     <>
       <div className="searchWrapper">
         <SearchFrom
           onError={setError}
           showModal={() => setShowModal(!showModal)}
-          onSearch={handleSearchSubmit}
+          onSearch={setQuery}
         />
         {isLoading || results.length < 0 ? (
           <div className="loaderWrapper">
@@ -119,10 +117,9 @@ function App() {
       {error && <p>There`s some mistake </p>}
 
       {showModal && (
-          <ImageModal closeModal={() => setShowModal(!showModal)}>
-            <ImageCard {...selectedImage} />
-          </ImageModal>
-
+        <ImageModal closeModal={() => setShowModal(!showModal)}>
+          <ImageCard {...selectedImage} />
+        </ImageModal>
       )}
     </>
   );
