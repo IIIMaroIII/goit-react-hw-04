@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import Loader from './components/Loader/Loader';
 import LoadMore from './components/LoadMore/LoadMore';
 import ImageModal from './components/reusable/ImageModal/ImageModal';
+import ImageCard from './components/ImageGallery/ImageCard/ImageCard';
 import SearchAPI from './components/services/searchAPI';
 import SearchFrom from './components/SearchForm/SearchForm';
 import ImageGallery from './components/ImageGallery/ImageGallery';
@@ -10,60 +11,126 @@ import clsx from 'clsx';
 import Button from './components/reusable/Button/Button';
 
 function App() {
+  const API = new SearchAPI();
+
   const [showModal, setShowModal] = useState(false);
+  const [selectedImage, setSelectedImage] = useState({});
   const [results, setResults] = useState([]);
-  const [pagination, setPagination] = useState({});
-  const [search, setSearch] = useState('');
+  const [page, setPage] = useState(0);
+  const [isLoadMoreActive, setLoadMore] = useState(false);
+  const [error, setError] = useState(false);
+  const [query, setQuery] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  const onSearchSubmit = value => {
-    return setSearch(value);
+  // async function fetchData() {
+  //   setIsLoading(true);
+  //   setLoadMore(false);
+  //   const { results } = await API.getImages(query, page);
+  //   setResults(prev => [...prev, ...results]);
+  //   setIsLoading(false);
+  //   setLoadMore(true);
+  // }
+
+  const handleSearchSubmit = async value => {
+    setError(false);
+    setQuery(value);
+    setResults([]);
+    setIsLoading(true);
+    try {
+      const { total, total_pages, results } = await API.getImages(value, 1);
+      setQuery(value);
+      setResults(results);
+      setLoadMore(true);
+      API.total = total;
+      API.total_pages = total_pages;
+
+      setLoadMore(true);
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setIsLoading(false);
+      setPage(1);
+    }
+  };
+  const handleLoadMore = async () => {
+    setPage(prev => prev + 1);
   };
 
-  const toggleModal = () => {
-    setShowModal(!showModal);
-  };
-
-  /**
-   * HTTP request after Search has changed
-   */
+  function toggleLoadMoreAndLoader() {
+    if (isLoadMoreActive || !isLoading) {
+      return <LoadMore onLoadMore={handleLoadMore} />;
+    }
+    return <Loader />;
+  }
 
   useEffect(() => {
-    setResults([]);
-    async function fetch() {
-      try {
+    if (page > 1) {
+      async function fetchData() {
         setIsLoading(true);
-        const API = new SearchAPI();
-        const { total, total_pages, results } = await API.getImages(search);
-        setResults(results);
-        setPagination({ total, total_pages });
-      } catch (error) {
-        console.log(error.message);
-      } finally {
+        setLoadMore(false);
+        const { results } = await API.getImages(query, page);
+        setResults(prev => [...prev, ...results]);
         setIsLoading(false);
+        setLoadMore(true);
+      }
+      try {
+        fetchData();
+        // fetchData; // Define this func inside body of useEffect???
+      } catch (error) {
+        setError(true);
       }
     }
-    fetch();
-  }, [search]);
+    // return () => {
+    //   setIsLoading(true);
+    //   setLoadMore(false);
+    // };
+  }, [page]);
 
+  console.log(selectedImage);
   return (
     <>
-      <SearchFrom
-        isSubmitting={isLoading}
-        showModal={toggleModal}
-        onSearch={onSearchSubmit}
-      />
+      <div className="searchWrapper">
+        <SearchFrom
+          onError={setError}
+          showModal={() => setShowModal(!showModal)}
+          onSearch={handleSearchSubmit}
+        />
+        {isLoading || results.length < 0 ? (
+          <div className="loaderWrapper">
+            <Loader />
+          </div>
+        ) : (
+          ''
+        )}
+      </div>
 
       {results.length > 0 && (
         <div className="wrapper">
-          <ImageGallery onModalOpen={toggleModal} data={results} />
-          <LoadMore isSubmitting={isLoading} />
+          <div className="galleryWrapper">
+            <ImageGallery
+              setImage={setSelectedImage}
+              onModalOpen={() => setShowModal(!showModal)}
+              data={results}
+            />
+            {toggleLoadMoreAndLoader()}
+          </div>
         </div>
       )}
-      {isLoading && <Loader />}
-      {showModal && <ImageModal closeModal={toggleModal}></ImageModal>}
+      {error && <p>There`s some mistake </p>}
+
+      {showModal && (
+          <ImageModal closeModal={() => setShowModal(!showModal)}>
+            <ImageCard {...selectedImage} />
+          </ImageModal>
+
+      )}
     </>
   );
 }
-
 export default App;
+// {
+//   isLoadMoreActive && <LoadMore onLoadMore={handleLoadMore} />;
+// }
+// {
+//   isLoading && <Loader />;
+// }

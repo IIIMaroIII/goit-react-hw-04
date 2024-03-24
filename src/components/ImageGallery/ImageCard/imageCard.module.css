@@ -23,6 +23,7 @@
    background-color: var(--middle-grey); 
 } */
 .wrapper {
+  position: relative;
   border-radius: inherit;
   width: 100%;
   height: 100%;
@@ -33,4 +34,11 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+.infoWrapper {
+  position: absolute;
+  width: 100%;
+  background-color: var(--light-grey);
+  bottom: 0;
+  left: 0;
 }

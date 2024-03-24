@@ -30,10 +30,10 @@ const ImageModal = ({ children, closeModal }) => {
   return createPortal(
     <div onClick={closeModalByClick} className={css.backdrop}>
       <div className={css.content}>
-        {children}
         <Button className={css.btn} onClick={closeModal}>
           <IoMdClose className={css.icon} />
         </Button>
+        {children}
       </div>
     </div>,
     modalRoot,

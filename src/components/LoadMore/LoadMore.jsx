@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import css from './loadMore.module.css';
 import Button from '../reusable/Button/Button';
 
-const LoadMore = ({ isSubmitting, onLoadMore }) => {
+const LoadMore = ({ onLoadMore }) => {
   return (
     <div className={css.wrapper}>
-      <Button className={css.btn} onClick={onLoadMore} disabled={isSubmitting}>
+      <Button className={css.btn} onClick={onLoadMore}>
         Load more
       </Button>
     </div>

@@ -9,6 +9,8 @@
   transform: scale(1);
   border-radius: 0;
   transition: transform 250ms ease-in-out, border-radius 250ms ease-in-out;
+  box-shadow: 5px 10px 20px rgba(0, 0, 0, 0.487),
+    8px 15px 25px rgba(0, 0, 0, 0.646), 12px 18px 30px rgba(0, 0, 0, 0.855);
 }
 
 .item:hover {

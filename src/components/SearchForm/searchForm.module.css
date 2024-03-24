@@ -1,4 +1,11 @@
 .wrapper {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+  transform: translateX(-100%);
+  z-index: 2;
+
   padding: 8px 0;
   background: linear-gradient(
     45deg,
@@ -11,6 +18,8 @@
   );
   background-size: 500% 500%;
   animation: gradientAnimation 10s infinite alternate;
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.487),
+    2px 6px 13px rgba(0, 0, 0, 0.646), 3px 9px 16px rgba(0, 0, 0, 0.855);
 }
 @keyframes gradientAnimation {
   0% {
@@ -20,15 +29,11 @@
     background-position: 50% 100%;
   }
 }
+.wrapperLoad {
+  transform: translateX(0);
+  transition: transform 1000ms ease-in-out 500ms;
+}
 
-/* @keyframes gradientAnimation {
-      0% {
-        background-position: 0% 50%;
-      }
-      100% {
-        background-position: 100% 50%;
-      }
-    } */
 .form {
   width: 400px;
   margin: 0 auto;
@@ -37,33 +42,46 @@
 .btn {
   position: absolute;
   top: 0;
-  left: 0;
+  left: 1%;
+  transform: translateY(13%);
+  width: 2em;
+  height: 2em;
   background-color: transparent;
   border-color: transparent;
+  border-radius: 6px;
+  box-shadow: none;
+  transition: box-shadow 250ms ease-in-out;
 }
 .btn:hover,
 .btn:focus {
   background-color: transparent;
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.487),
+    2px 6px 13px rgba(0, 0, 0, 0.646), 3px 9px 16px rgba(0, 0, 0, 0.855);
 }
 
 .icon {
+  position: absolute;
+  top: 0;
+  left: 0;
   background-color: transparent;
   color: var(--dark-grey);
-  transform: scale(1);
+  transform: translate(20%, 20%) scale(1);
   transition: transform 250ms ease-in-out, color 250ms ease-in-out;
-  width: 20px;
-  height: 20px;
+  width: 70%;
+  height: 70%;
 }
 .btn:hover .icon {
   color: var(--accent-blue);
-  transform: scale(1.2);
+  transform: translate(20%, 20%) scale(1.2);
 }
 
 .input {
   display: inline-block;
   border: 1px solid transparent;
+  font-size: 18px;
+  font-style: italic;
   background-color: var(--light-grey);
-  padding: 10px 40px;
+  padding: 10px 3em;
   width: 100%;
   margin: 0 auto;
   transition: border 250ms ease-in-out;

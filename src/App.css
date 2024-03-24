@@ -1,4 +1,23 @@
 .wrapper {
+  position: relative;
+  margin: 0 auto;
   max-width: 1440px;
   padding: 24px;
+}
+.searchWrapper {
+  position: relative;
+  min-height: 60px;
+  /* background-color: red; */
+}
+.galleryWrapper {
+  position: relative;
+  top: 0;
+  left: 0;
+  min-height: 50rem;
+}
+.loaderWrapper {
+  position: absolute;
+  bottom: -130%;
+  left: 50%;
+  transform: translateX(-50%);
 }
