@@ -1,0 +1,26 @@
+.wrapper {
+  position: absolute;
+  bottom: 50%;
+  left: 50%;
+  opacity: 0;
+  transform: translateY(50%) translateX(-50%);
+  z-index: 15;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  padding: 8px 16px;
+  background-color: red;
+  font-weight: bold;
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.487),
+    2px 6px 13px rgba(0, 0, 0, 0.646), 3px 9px 16px rgba(0, 0, 0, 0.855);
+}
+
+.wrapper.wrapperLoad {
+  opacity: 1;
+  transform: translateY(250%) translateX(-50%);
+  border: 1px solid var(--red);
+  transition: transform 1000ms ease-in-out 500ms,
+    opacity 500ms ease-in-out 500ms, border 250ms ease-in-out;
+}
+.text {
+  font-size: 18px;
+}

@@ -18,7 +18,6 @@ const ImageGallery = ({ setImage, data, onModalOpen }) => {
             className={css.item}
           >
             <ImageCard
-              id={id}
               alt={alt}
               description={description}
               urls={urls}

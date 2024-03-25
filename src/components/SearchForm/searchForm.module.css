@@ -5,7 +5,7 @@
   left: 0;
   transform: translateX(-100%);
   z-index: 2;
-
+  outline: 1px solid red;
   padding: 8px 0;
   background: linear-gradient(
     45deg,

@@ -2,14 +2,18 @@
   width: 160px;
   margin: 24px auto;
   transform: scale(1);
+  text-align: center;
+  color: red;
   transition: transform 250ms ease-in-out;
 }
 .btn {
+  display: block;
   text-align: center;
   width: 100%;
-
+  font-size: inherit;
   letter-spacing: normal;
-  display: inline-block;
+
+  font-size: 32px;
 }
 .wrapper:hover {
   transform: scale(1.05);
