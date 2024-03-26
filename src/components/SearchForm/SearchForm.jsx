@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import Button from '../reusable/Button/Button';
 import { IoSearchOutline } from 'react-icons/io5';
 import css from './searchForm.module.css';

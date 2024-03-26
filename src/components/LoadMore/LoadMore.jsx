@@ -1,9 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import css from './loadMore.module.css';
 import Button from '../reusable/Button/Button';
-import ErrorMessage from '../ErrorMessage/ErrorMessage';
-import clsx from 'clsx';
 
 const LoadMore = ({ error, onLoadMore }) => {
   return (

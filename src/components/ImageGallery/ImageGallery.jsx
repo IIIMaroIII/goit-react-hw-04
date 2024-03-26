@@ -1,8 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+
 import css from './imageGallery.module.css';
 import ImageCard from './ImageCard/ImageCard';
-import ImageModal from '../reusable/ImageModal/ImageModal';
 
 const ImageGallery = ({ setImage, data, onModalOpen }) => {
   return (

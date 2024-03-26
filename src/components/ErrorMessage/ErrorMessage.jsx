@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
+
 import css from './errorMessage.module.css';
 import Button from '../reusable/Button/Button';
 import { IoMdClose } from 'react-icons/io';
