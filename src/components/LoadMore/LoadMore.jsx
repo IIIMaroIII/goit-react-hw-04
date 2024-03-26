@@ -5,29 +5,16 @@ import Button from '../reusable/Button/Button';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import clsx from 'clsx';
 
-const LoadMore = ({ error, status, onLoadMore }) => {
+const LoadMore = ({ error, onLoadMore }) => {
   return (
-    <div
-      className={clsx(
-        css.wrapper,
-        status === 'rejected' && status === 'rejected' && css.theEnd,
-      )}
-    >
-      {status === 'rejected' ? (
-        <Button
-          className={css.loadMore}
-          onClick={onLoadMore}
-          disabled={status === 'rejected' && true}
-        >
-          {error.message}
+    <div className={css.wrapper}>
+      {!error ? (
+        <Button className={css.btn} onClick={onLoadMore}>
+          Load more
         </Button>
       ) : (
-        <Button
-          className={css.btn}
-          onClick={onLoadMore}
-          disabled={status === 'rejected' && true}
-        >
-          Load more
+        <Button className={css.loadMore} onClick={onLoadMore} disabled={true}>
+          {error.message}
         </Button>
       )}
     </div>

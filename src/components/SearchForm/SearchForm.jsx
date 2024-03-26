@@ -14,10 +14,6 @@ const SearchForm = ({ isSubmitting, onSearch }) => {
   const onSubmit = e => {
     e.preventDefault();
     const inputValue = e.target.elements.search.value.trim().toLowerCase();
-    // if (inputValue.trim() === '') {
-    //   onError({ message: 'Type in your request' });
-    //   return;
-    // }
     onSearch(inputValue);
   };
   return (

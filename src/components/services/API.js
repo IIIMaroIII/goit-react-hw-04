@@ -12,7 +12,7 @@ async function API(value, page, onError) {
       params: {
         query: value,
         page: page,
-        per_page: 50,
+        per_page: 30,
       },
     });
     const response = await axios.get('/search/photos');

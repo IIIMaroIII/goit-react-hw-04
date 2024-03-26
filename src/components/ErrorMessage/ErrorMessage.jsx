@@ -1,23 +1,37 @@
 import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import css from './errorMessage.module.css';
+import Button from '../reusable/Button/Button';
+import { IoMdClose } from 'react-icons/io';
 import clsx from 'clsx';
 
-const ErrorMessage = ({ status, children }) => {
-  // const [loaded, setLoaded] = useState(false);
-  // useEffect(() => {
-  //   setLoaded(true);
-  // }, [onError]);
-
+const ErrorMessage = ({ close, children }) => {
+  const closeModalByEsc = e => {
+    if (e.code === 'Escape') {
+      close();
+    }
+  };
+  const closeModalByClick = e => {
+    if (e.target === e.currentTarget) {
+      close();
+    }
+  };
+  useEffect(() => {
+    window.addEventListener('keydown', closeModalByEsc);
+    return () => {
+      window.removeEventListener('keydown', closeModalByEsc);
+    };
+  }, []);
   return (
-    <div
-      className={status === 'rejected' && clsx(css.wrapper, css.wrapperLoad)}
-    >
+    <div className={clsx(css.wrapper, css.wrapperLoad)}>
       <p className={css.text}>{children}</p>
+      <Button className={css.btn} onClick={close}>
+        <IoMdClose className={css.icon} />
+      </Button>
     </div>
   );
 };
-ErrorMessage.defaultProps = {};
+ErrorMessage.defaultProps = { close: () => {} };
 ErrorMessage.propTypes = {};
 
 export default ErrorMessage;

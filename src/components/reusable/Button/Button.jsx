@@ -13,7 +13,7 @@ const Button = ({
 }) => {
   return (
     <button
-      className={clsx(css.btn, className)}
+      className={className}
       type={type}
       onClick={onClick}
       disabled={disabled}
