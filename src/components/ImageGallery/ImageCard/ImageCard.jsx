@@ -1,9 +1,9 @@
-import React from 'react';
-
+import { useEffect } from 'react';
 import css from './imageCard.module.css';
 
 const ImageCard = ({
   onModalOpen,
+  setImage,
   alt,
   description,
   urls,
@@ -20,12 +20,6 @@ const ImageCard = ({
         src={onModalOpen ? `${urls.regular}` : `${urls.small}`}
         alt={alt}
       />
-      {onModalOpen && (
-        <div className={css.infoWrapper}>
-          <p>Likes: {likes}</p>
-          <p>Description: {description}</p>
-        </div>
-      )}
     </div>
   );
 };

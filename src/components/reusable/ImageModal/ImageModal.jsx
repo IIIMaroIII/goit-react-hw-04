@@ -1,12 +1,10 @@
 import React from 'react';
-import { createPortal } from 'react-dom';
+// import { createPortal } from 'react-dom';
 import { IoMdClose } from 'react-icons/io';
 import PropTypes from 'prop-types';
 import Button from '../Button/Button';
 import css from './imageModal.module.css';
 import { useEffect } from 'react';
-
-const modalRoot = document.querySelector('#modal-root');
 
 const ImageModal = ({ children, closeModal }) => {
   const closeModalByEsc = e => {

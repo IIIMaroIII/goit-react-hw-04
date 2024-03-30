@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import Loader from './components/Loader/Loader';
 import LoadMore from './components/LoadMore/LoadMore';
-import ImageModal from './components/reusable/ImageModal/ImageModal';
-import ImageCard from './components/ImageGallery/ImageCard/ImageCard';
+// import ImageModal from './components/reusable/ImageModal/ImageModal';
+// import ImageCard from './components/ImageGallery/ImageCard/ImageCard';
 import API from './components/services/API';
 import SearchFrom from './components/SearchForm/SearchForm';
 import ImageGallery from './components/ImageGallery/ImageGallery';
@@ -36,42 +36,35 @@ function App() {
       setError({ message: 'Type in your request' });
       return;
     }
-    setIsLoading(true);
+
     setQuery(value);
-    setShowModal(false);
-    setError(null);
     setItems([]);
     setPage(1);
   };
 
   useEffect(() => {
     if (!query) return;
-    setIsLoading(false);
     setError(null);
     async function fetch() {
       try {
         setIsLoading(true);
         const { total_pages, results } = await API(query, page, setError);
         if (results.length === 0) {
-          setIsLoading(true);
           setError({ message: 'We`ve found nothing according your request' });
-          setIsLoading(false);
           return;
         }
         if (page === total_pages) {
-          setIsLoading(true);
           setError({ message: 'You`ve reached the end of collection' });
-          setIsLoading(false);
           return;
         }
-
-        setIsLoading(true);
         setItems(p => [...p, ...results]);
         setTotalPages(total_pages);
-        console.log(total_pages);
-        setIsLoading(false);
+        // setIsLoading(false);
       } catch (error) {
         setError({ message: error.message });
+        // setIsLoading(false);
+      } finally {
+        setIsLoading(false);
       }
     }
     fetch();
@@ -112,12 +105,6 @@ function App() {
             {toggleLoadMoreAndLoader()}
           </div>
         </div>
-      )}
-
-      {showModal && (
-        <ImageModal closeModal={() => setShowModal(!showModal)}>
-          <ImageCard {...selectedImage} />
-        </ImageModal>
       )}
     </>
   );

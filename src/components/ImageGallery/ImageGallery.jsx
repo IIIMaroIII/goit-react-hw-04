@@ -9,14 +9,15 @@ const ImageGallery = ({ setImage, data, onModalOpen }) => {
       {data.map(({ id, alt, description, urls, likes, ...restArgs }) => {
         return (
           <li
-            onClick={() => {
-              onModalOpen(true);
-              setImage({ id, alt, description, urls, likes, onModalOpen });
-            }}
+            // onClick={() => {
+            //   onModalOpen(true);
+            // }}
             key={id}
             className={css.item}
           >
             <ImageCard
+              onModalOpen={onModalOpen}
+              setImage={setImage}
               alt={alt}
               description={description}
               urls={urls}
