@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import Button from '../reusable/Button/Button';
 import { IoSearchOutline } from 'react-icons/io5';
-import css from './searchForm.module.css';
+import css from './searchBar.module.css';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 
-const SearchForm = ({ isSubmitting, onSearch }) => {
+const SearchBar = ({ isSubmitting, onSearch }) => {
   const [loaded, setLoaded] = useState(false);
   useEffect(() => {
     setLoaded(true);
@@ -30,6 +30,6 @@ const SearchForm = ({ isSubmitting, onSearch }) => {
   );
 };
 
-SearchForm.propTypes = {};
+SearchBar.propTypes = {};
 
-export default SearchForm;
+export default SearchBar;

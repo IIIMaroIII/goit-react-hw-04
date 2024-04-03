@@ -1,8 +1,8 @@
 import React from 'react';
-import css from './loadMore.module.css';
+import css from './loadMoreBtn.module.css';
 import Button from '../reusable/Button/Button';
 
-const LoadMore = ({ error, onLoadMore }) => {
+const LoadMoreBtn = ({ error, onLoadMore }) => {
   return (
     <div className={css.wrapper}>
       {!error ? (
@@ -18,6 +18,6 @@ const LoadMore = ({ error, onLoadMore }) => {
   );
 };
 
-LoadMore.propTypes = {};
+LoadMoreBtn.propTypes = {};
 
-export default LoadMore;
+export default LoadMoreBtn;

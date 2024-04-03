@@ -1,24 +1,28 @@
 import { useState, useEffect } from 'react';
 import Loader from './components/Loader/Loader';
-import LoadMore from './components/LoadMore/LoadMore';
-// import ImageModal from './components/reusable/ImageModal/ImageModal';
-// import ImageCard from './components/ImageGallery/ImageCard/ImageCard';
+import LoadMoreBtn from './components/LoadMoreBtn/LoadMoreBtn';
 import API from './components/services/API';
-import SearchFrom from './components/SearchForm/SearchForm';
+import SearchBar from './components/SearchBar/SearchBar';
 import ImageGallery from './components/ImageGallery/ImageGallery';
+import ImageCard from './components/ImageGallery/ImageCard/ImageCard';
 import ErrorMessage from './components/ErrorMessage/ErrorMessage';
 import './App.css';
+import ImageModal from './components/ImageModal/ImageModal';
 
 function App() {
   const [error, setError] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const [selectedImage, setSelectedImage] = useState({});
+  const [selectedImage, setSelectedImage] = useState(null);
   const [items, setItems] = useState([]);
   const [page, setPage] = useState(null);
   const [totalPages, setTotalPages] = useState(0);
   const [query, setQuery] = useState('');
+
+  const toggleModal = () => {
+    setShowModal(!showModal);
+  };
 
   const onLoadMore = () => {
     setPage(p => p + 1);
@@ -26,7 +30,7 @@ function App() {
 
   function toggleLoadMoreAndLoader() {
     if (!isLoading) {
-      return <LoadMore error={error} onLoadMore={onLoadMore} />;
+      return <LoadMoreBtn error={error} onLoadMore={onLoadMore} />;
     }
     return <Loader />;
   }
@@ -41,6 +45,10 @@ function App() {
     setItems([]);
     setPage(1);
   };
+  useEffect(() => {
+    if (!selectedImage) return;
+    console.log('My selected image', selectedImage);
+  }, [selectedImage]);
 
   useEffect(() => {
     if (!query) return;
@@ -73,7 +81,7 @@ function App() {
   return (
     <>
       <div className="searchWrapper">
-        <SearchFrom
+        <SearchBar
           onError={setError}
           showModal={() => setShowModal(!showModal)}
           onSearch={onHandleSearchSubmit}
@@ -99,12 +107,17 @@ function App() {
           <div className="galleryWrapper">
             <ImageGallery
               setImage={setSelectedImage}
-              onModalOpen={() => setShowModal(!showModal)}
+              toggleModal={toggleModal}
               data={items}
             />
             {toggleLoadMoreAndLoader()}
           </div>
         </div>
+      )}
+      {showModal && (
+        <ImageModal showModal={showModal} toggleModal={toggleModal}>
+          <ImageCard {...selectedImage} />
+        </ImageModal>
       )}
     </>
   );

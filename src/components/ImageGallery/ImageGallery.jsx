@@ -1,22 +1,21 @@
-import React from 'react';
-
 import css from './imageGallery.module.css';
 import ImageCard from './ImageCard/ImageCard';
 
-const ImageGallery = ({ setImage, data, onModalOpen }) => {
+const ImageGallery = ({ setImage, data, toggleModal }) => {
   return (
     <ul className={css.gallery}>
       {data.map(({ id, alt, description, urls, likes, ...restArgs }) => {
         return (
           <li
-            // onClick={() => {
-            //   onModalOpen(true);
-            // }}
+            onClick={() => {
+              toggleModal();
+              setImage({ id, alt, description, urls, likes });
+            }}
             key={id}
             className={css.item}
           >
             <ImageCard
-              onModalOpen={onModalOpen}
+              onModalOpen={toggleModal}
               setImage={setImage}
               alt={alt}
               description={description}

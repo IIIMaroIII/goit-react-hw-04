@@ -9,7 +9,6 @@ const ImageCard = ({
   urls,
   likes,
   id,
-  ...allArgs
 }) => {
   return (
     <div className={css.wrapper}>
@@ -17,7 +16,7 @@ const ImageCard = ({
         loading="lazy"
         id={id}
         className={css.image}
-        src={onModalOpen ? `${urls.regular}` : `${urls.small}`}
+        src={!onModalOpen ? `${urls.full}` : `${urls.small}`}
         alt={alt}
       />
     </div>

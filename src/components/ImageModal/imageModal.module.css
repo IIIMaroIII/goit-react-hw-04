@@ -36,18 +36,21 @@
   position: absolute;
   z-index: 100;
   padding: 6px;
-  border: 1px solid var(--black);
+  border: 1px solid transparent;
+  border-radius: 50%;
   color: var(--black);
-  border-radius: 4px;
   background-color: var(--light-grey);
   transform: scale(1);
+  opacity: 0.35;
   transition: transform 250ms ease-in-out, border 250ms ease-in-out,
-    color 250ms ease-in-out;
+    color 250ms ease-in-out, opacity 250ms ease-in-out;
 }
 .btn:hover,
 .btn:focus {
   border: 1px solid var(--light-grey);
   background-color: var(--black);
+  border-radius: 50%;
   color: var(--light-grey);
   transform: scale(1.2);
+  opacity: 1;
 }
